@@ -26,13 +26,13 @@ class Category(PublishedModel):
 
     @staticmethod
     def filter_published():
-        """Returns filters published categories."""
+        """Фильтр опубликованные категории."""
         return Category.objects.filter(
             is_published=True)
 
     @staticmethod
     def get_by_slug_or_404(slug):
-        """Returns published category or raises Http404"""
+        """Возвращает опубликованную категорию иначе бросает Http404"""
         return get_object_or_404(Category, slug=slug, is_published=True)
 
 
@@ -73,14 +73,14 @@ class Post(PublishedModel):
 
     @staticmethod
     def filter_published():
-        """Returns filters published posts, not in future."""
+        """Фильтр текущие опубликованые посты."""
         return Post.objects.filter(is_published=True,
                                    pub_date__lte=timezone.now(),
                                    category__is_published=True)
 
     @staticmethod
     def get_by_id_or_404(id):
-        """Returns published post or raises Http404."""
+        """Возвращает опубликованный пост иначе бросает Http404."""
         return get_object_or_404(Post,
                                  pk=id,
                                  is_published=True,
